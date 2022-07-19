@@ -1,6 +1,7 @@
 #include "videoio.h"
 #include "resize.h"
 #include "common.h"
+#include <mutex>
 
 using namespace std;
 

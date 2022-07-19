@@ -3,8 +3,8 @@ project(yolov5_deepsort VERSION 0.1.0)
 
 add_subdirectory(deepsort)
 
-set(OpenCV_DIR /home/linaro/workspace/opencv/lib/cmake/opencv4)  # 填入OpenCVConfig.cmake
-find_package(OpenCV 4 REQUIRED)
+# set(OpenCV_DIR /home/linaro/workspace/opencv/lib/cmake/opencv4)  # 填入OpenCVConfig.cmake
+ find_package(OpenCV  REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 set(
@@ -12,8 +12,8 @@ set(
     "${PROJECT_SOURCE_DIR}/include"
     "${PROJECT_SOURCE_DIR}/yolov5/include"
     "${PROJECT_SOURCE_DIR}/deepsort/include"
-    ${PROJECT_SOURCE_DIR}/3rdparty/librknn_api/include
-    ${PROJECT_SOURCE_DIR}/3rdparty/rga/include
+#    ${PROJECT_SOURCE_DIR}/3rdparty/librknn_api/include
+#    ${PROJECT_SOURCE_DIR}/3rdparty/rga/include
 )
 
 include_directories(${include_libs})
@@ -33,4 +33,4 @@ set(
 add_definitions("-g")
 
 target_link_libraries(yolov5_deepsort ${OpenCV_LIBS})
-target_link_libraries(yolov5_deepsort ${dynamic_libs} deepsort)
+target_link_libraries(yolov5_deepsort -lrknnrt -lrga deepsort -lpthread)

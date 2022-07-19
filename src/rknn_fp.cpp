@@ -51,11 +51,14 @@ rknn_fp::rknn_fp(const char *model_path, int cpuid, rknn_core_mask core_mask,
         printf("rknn_init fail! ret=%d\n", ret);
         exit(-1);
     }
-	ret = rknn_set_core_mask(ctx, core_mask);
-	if(ret < 0)
-	{
-        printf("set NPU core_mask fail! ret=%d\n", ret);
-        exit(-1);
+    if (core_mask == RKNN_NPU_CORE_2)
+    {
+        ret = rknn_set_core_mask(ctx, core_mask);
+        if(ret < 0)
+        {
+            printf("set NPU core_mask fail! ret=%d\n", ret);
+            exit(-1);
+        }
     }
 	// rknn_sdk_version
 	rknn_sdk_version version;
