@@ -6,3 +6,7 @@ data/*
 
 .vscode
 make
+build*
+*.pt
+*.pth
+*.rknn

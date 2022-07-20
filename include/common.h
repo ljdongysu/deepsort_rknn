@@ -1,6 +1,7 @@
 #pragma once // 防止重定义
 #include <vector>
 #include "opencv2/opencv.hpp"
+#include<sys/time.h>
 
 #ifndef BOX_H
 #include "box.h"
@@ -14,13 +15,13 @@
 #define IMG_PAD 1920
 
 // 网络的参数
-#define NET_INPUTHEIGHT 640
-#define NET_INPUTWIDTH 640
+#define NET_INPUTHEIGHT 320
+#define NET_INPUTWIDTH 320
 #define NET_INPUTCHANNEL 3
 #define GRID0 80
 #define GRID1 40
 #define GRID2 20
-#define OBJ_CLASS_NUM     2
+#define OBJ_CLASS_NUM     5
 #define nyolo 3   //n yolo layers;
 #define nanchor 3 //n anchor per yolo layer
 #define PROP_BOX_SIZE     (5+OBJ_CLASS_NUM)
@@ -67,4 +68,20 @@ struct imageout_idx
 {
 	cv::Mat img; 
 	detect_result_group_t dets;
+};
+
+struct Time{
+    float time_use=0;
+    struct timeval start;
+    struct timeval end;
+    Time(){
+        gettimeofday(&start,NULL);
+    }
+    void Timing(std::string name)
+    {
+        gettimeofday(&end,NULL);
+        time_use=(end.tv_sec-start.tv_sec)*1000+(end.tv_usec-start.tv_usec)/1000.0;//微秒
+        gettimeofday(&start,NULL);
+        printf(" %s time_use is %.10f ms\n", name.c_str(), time_use);
+    }
 };

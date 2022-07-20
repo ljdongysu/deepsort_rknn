@@ -16,8 +16,8 @@ using namespace std;
 bool add_head = false;
 string PROJECT_DIR = "/home/firefly/ljdong/yolov5_Deepsort_rknn";
 //string YOLO_MODEL_PATH = PROJECT_DIR + "/model/best_nofocus_relu.rknn";
-string YOLO_MODEL_PATH = "/home/firefly/sunhao/yolov5_rk3566/build_delete/model/A6.0.1_best.rknn";
-string SORT_MODEL_PATH = PROJECT_DIR + "/model/osnet_x0_25_market.rknn";
+string YOLO_MODEL_PATH = "/home/firefly/ljdong/model/osnet.rknn";
+string SORT_MODEL_PATH = "/home/firefly/ljdong/model/osnet.rknn";
 
 string VIDEO_PATH = PROJECT_DIR + "/data/DJI_0001_S_cut.mp4";
 string VIDEO_SAVEPATH = PROJECT_DIR + "/data/results.mp4";

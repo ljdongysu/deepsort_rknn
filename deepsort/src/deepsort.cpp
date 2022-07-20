@@ -92,7 +92,21 @@ void DeepSort::sort(cv::Mat& frame, DETECTIONS& detections) {
 void DeepSort::sort(cv::Mat& frame, DETECTIONSV2& detectionsv2) {
     std::vector<CLSCONF>& clsConf = detectionsv2.first;
     DETECTIONS& detections = detectionsv2.second;
+//    DETECTION_ROW detectTemp;
+//
+//    DETECTBOX detectbox{50,50,60,70};
+//    detectTemp.tlwh = detectbox;
+//    detections.push_back(detectTemp);
+//    DETECTBOX detectbox1{100,50,100,80};
+//    detectTemp.tlwh = detectbox1;
+//    detections.push_back(detectTemp);
+//
+//    DETECTBOX detectbox2{200,50,100,80};
+//    detectTemp.tlwh = detectbox2;
+//    detections.push_back(detectTemp);
+    Time timeCost;
     bool flag = featureExtractor->getRectsFeature(frame, detections);
+    timeCost.Timing("getRectsFeature");
     if (flag) {
         objTracker->predict();
         objTracker->update(detectionsv2);
@@ -104,6 +118,7 @@ void DeepSort::sort(cv::Mat& frame, DETECTIONSV2& detectionsv2) {
             result.push_back(make_pair(track.track_id, track.to_tlwh()));
             results.push_back(make_pair(CLSCONF(track.cls, track.conf) ,track.to_tlwh()));
         }
+        timeCost.Timing("track");
     }
 }
 

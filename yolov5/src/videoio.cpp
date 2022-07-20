@@ -166,6 +166,9 @@ void videoWrite(const char* save_path,int cpuid)
 			queueOutput.pop();
 			mtxQueueOutput.unlock();
 			draw_image(res_pair.img, res_pair.dets);
+            static int imageId = 0;
+            imageId += 1;
+            cv::imwrite("result/image_" + std::to_string(imageId) + ".jpg", res_pair.img);
 			vid_writer.write(res_pair.img); // Save-video
 		}
 		// 最后一帧检测/追踪结束 bWriting置为false 此时如果queueOutput仍存在元素 继续写
